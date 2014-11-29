@@ -1,46 +1,58 @@
 \documentclass{letter}[12pt]
 \usepackage[colorlinks=false,hidelinks]{hyperref}
 \usepackage{graphicx}
+\usepackage[headheight=0pt,headsep=0pt]{geometry}% http://ctan.org/pkg/geometry
 
 \input ArtNouvc.fd
 \input ArtNouv.fd
 \input Typocaps.fd
-\newcommand*\initfamily{\usefont{U}{ArtNouv}{xl}{n}}
+\newcommand*\initfamily{\usefont{U}{Typocaps}{xl}{n}}
+
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
 
 \begin{document}
 \pagenumbering{gobble}
 \begin{letter}{}
    \begin{center}
-     \includegraphics[width=8cm]{flourish.eps}
+     \includegraphics[width=6cm]{flourish.eps}
 
-     \vspace{1cm}
+     \vspace{5mm}
 
-\normalfont\initfamily
+%\normalfont\initfamily
+\normalfont\calligra
 \Large
-{\selectfont\Huge K}{\normalfont{athryn} }
-{\selectfont\Huge D}{\normalfont{orsey} }
-{\selectfont\Huge H}{\normalfont{uff}}\\
-{\normalfont{and}}\\
-{\selectfont\Huge M}{\normalfont{atthew} }
-{\selectfont\Huge S}{\normalfont{trom} }
-{\selectfont\Huge B}\normalfont{orman}\\
-%{\Huge K}athryn {\Huge D}orsey {\Huge H}uff\\
-%and \\
-%{\Huge M}atthew {\Huge S}trom {\Huge B}orman\\
-     cordially invite you to our wedding\\
+{\selectfont\Huge K}athryn
+{\selectfont\Huge D}orsey
+{\selectfont\Huge H}uff\\
+{\selectfont{and}}\\
+{\selectfont\Huge M}atthew 
+{\selectfont\Huge S}trom
+{\selectfont\Huge B}orman
+
+     \vspace{5mm}
+
+{\normalfont\scshape\normalsize
+     request the pleasure of your company\\
+     at our wedding\\
      Saturday the Sixteenth of May\\
      Two Thousand and Fifteen\\
      at Six O'Clock in the evening\\
-     in the Ida Noyes Hall Theatre Room\\
-     3rd Floor, 1212 E. 59th St.,\\
-     Chicago, IL\\
+     Ida Noyes Hall\\
+     3rd Floor Theatre Room\\
+     1212 E 59th St.\\
+     Chicago, IL
 
-     \vspace{1cm}
+     \vspace{2mm}
+}
+     {\selectfont Dinner and Dancing to Follow}\\
+     \vspace{2mm}
+     {\normalfont\scshape\normalsize \textbf{\href{http://bit.ly/skwed}{R.S.V.P. }}online before April 16.\\
+     More information at \href{http://katyhuff.github.io/wedding}{katyhuff.github.io/wedding}.}
 
-     Reception immediately follows the ceremony.\\
-     More information at \href{http://katyhuff.github.io/wedding}{katyhuff.github.io/wedding}.
-     {\Huge R.S.V.P.} online at \href{http://bit.ly/skwed}{bit.ly/skwed} before April 16.
-
+     \vspace{5mm}
+    
+     \reflectbox{\rotatebox[origin=c]{180}{\includegraphics[width=6cm]{flourish.eps}}}
    \end{center}
 
        \end{letter}
