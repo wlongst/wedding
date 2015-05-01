@@ -1,0 +1,121 @@
+
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[textwidth=12cm,centering]{geometry}
+\usepackage[x11names]{xcolor}
+\usepackage{background}
+
+\newcommand*\wb[3]{%
+  {\fontsize{#1}{#2}\usefont{U}{webo}{xl}{n}#3}}
+
+% The page frame
+\SetBgColor{Goldenrod3}
+\SetBgAngle{0}
+\SetBgScale{1}
+\SetBgOpacity{1}
+\SetBgContents{%
+\begin{tikzpicture}
+\node at (0.5\paperwidth,0) {\wb{80}{34}{E}\rule[60pt]{.2\textwidth}{0.4pt}%
+  \raisebox{55pt}{%
+  \makebox[.6\textwidth]{\ \fontsize{24}{29}\selectfont\scshape Strom \& Katy }}%
+  \rule[60pt]{.2\textwidth}{0.4pt}\wb{80}{34}{F}};
+\node at (2,-0.5\textheight) {\rule{0.4pt}{.8\textheight}};
+\node at (19.5,-0.5\textheight) {\rule{0.4pt}{.8\textheight}};
+\node at (0.5\paperwidth,-\textheight) {\wb{80}{34}{G}\rule[-10pt]{\textwidth}{0.4pt}\wb{80}{34}{H}} ;
+\end{tikzpicture}%
+}
+
+% colorize text
+\newcommand*\ColText[1]{\textcolor{Goldenrod3}{#1}}
+
+% a tabular* for each food group
+%\newenvironment{Group}[1]
+%  {\noindent\begin{tabular*}{\textwidth}{@{}p{.8\linewidth}@{\extracolsep{\fill}}r@{}}
+%    {\fontsize{24}{29}\selectfont\ColText{#1}}\\[0.8em]}
+%  {\end{tabular*}}
+
+% a tabular* for each food group
+\newenvironment{Group}[1]
+  {\noindent\begin{tabular*}{\textwidth}{@{}p{.5\textwidth}@{\extracolsep{\fill}}r@{}}
+    {\fontsize{24}{29}\selectfont\ColText{#1}}\\[0.8em]}
+  {\end{tabular*}}
+
+% to format cenered entries
+\newcommand*\CenteredEntry[1]{%
+  \sffamily #1}
+
+% to format cenered explanations
+\newcommand*\CenteredExpl[1]{%
+  \footnotesize #1}
+
+% to format opposite facing entries
+\newcommand*\LREntry[2]{%
+  \sffamily #1 & \sffamily #2}
+
+% to format opposite facing entries
+\newcommand*\LRExpl[2]{%
+  \footnotesize #1 & \footnotesize #2}
+
+% to format each entry
+\newcommand*\Entry[2]{%
+  \sffamily #1 & \footnotesize\textit{#2}}
+
+% to format each subentry
+\newcommand*\Expl[2]{%
+  \hspace*{1em}\footnotesize #1 & \footnotesize\textit{#2}}
+
+\pagestyle{empty}
+
+\begin{document}
+\begin{Group}{}
+\LREntry{Parents of the Bride}{Parents of the Groom} \\
+\LRExpl{Diane Donovan}{Jan Strom \& Terry Jordan} \\
+\LRExpl{Harold Huff}{Mark Borman \& Laurie Laner} \\
+\LRExpl{Joan Todd}{}
+\end{Group}
+\begin{center}
+\CenteredEntry{Grandparents of the Groom} \\
+\CenteredExpl{Milton Strom \& Agnes Strom}
+\end{center}
+
+\vfill
+
+\begin{Group}{Ceremony}
+\Entry{Processional}{Tea for the Tillerman}\\
+\Expl{Greta Qaiyum}{Friend, Officiant}\\
+\Expl{Allison Gouch}{Sister of the Bride}\\
+\Expl{Peter Borman}{Brother of the Groom}\\
+\Expl{Katy \& Strom}{Bride \& Groom} \\
+\Entry{Readings}{} \\
+\Expl{Welcome, in her own words} {Greta Qaiyum} \\
+\Expl{Kahlil Gibran, On Marriage} {Allison Gouch} \\
+\Expl{Someone Else, Something Else}{Peter Borman} \\
+\Entry{Vows}{} \\
+\Expl{Personal Vows}{Katy \& Strom}\\
+\Expl{Community Vow}{All}\\
+%\Entry{Exchange of Rings}{} \\ 
+%\Expl{A 1924 heirloom from great-grandmother, Kathryn Burke.}{Katy's}\\
+%\Expl{A band with a single half twist, called a M{\"o}bius strip.}{Strom's}\\
+\end{Group}
+
+\vfill
+
+\begin{Group}{Reception}
+\Entry{Bar Opens}{6:30pm} \\
+\Expl{Beer, Wine, and Soda available}{} \\
+\Entry{Dinner Begins}{7:15pm} \\
+\Expl{Salads, Pastas, Vegetables}{} \\
+\Entry{Select Toasts}{8:00pm} \\
+\Expl{Bride \& Groom, Wedding Party}{} \\
+\Entry{Dances}{8:30pm} \\
+\Expl{Dance Me To The End of Love}{Bride \& Groom} \\
+\Expl{Dance Me To The End of Love}{Father \& Daughter} \\
+\Expl{Dance Me To The End of Love}{Mother \& Son} \\
+\Entry{Cake Cutting}{9:00pm} \\
+\Entry{Last Call}{11:30pm}
+\end{Group}
+
+\end{document}
+
