@@ -1,0 +1,34 @@
+Dearest {{ guests }},
+
+We are so thrilled that you will be joining us for our wedding. Thank you for your RSVP. We have a little over a month before the big day and we are really looking forward to seeing you there! The ceremony itself will take place at 6pm on May 16, 2015 within the Ida Noyes Hall Theatre Room, at the University of Chicago in Chicago, IL.
+
+{% if welcome %}
+We are also looking forward to seeing you at the Welcome Dinner on the 15th and we hope you will consider joining us for the Farewell Brunch on the 17th.  
+{%- endif %}
+{%- if not welcome %}
+We are not currently expecting to see you at the Welcome Dinner on the 15h, but we hope you will consider joining us for the Farewell Brunch on the 17th.
+{%- endif %} Both are being generously hosted by our parents. More information about 
+those events can be found here:
+http://katyhuff.github.io/wedding/#events
+
+Finally, we wanted to email today to answer a few questions we have been getting:
+
+If I haven't booked a hotel yet, where should I stay?
+Some options are listed at:
+http://katyhuff.github.io/wedding/#accommodation
+
+What type of clothes should I pack?
+May in Chicago is springtime and hovers between 55 and 65 degrees F, so light layers are recommended. The wedding is indoors.
+
+How should I dress for the ceremony?
+We love to see you all looking and feeling fabulous, so semi-formal attire is encouraged for the ceremony. However, any attire is welcome if it makes you feel like celebrating!
+
+Are you registered somewhere?
+You can also find that on the website at:
+http://katyhuff.github.io/wedding/#gifts
+
+If you have any additional questions, please send an email to stromandkaty@gmail.com.
+
+Thank You,
+Katy Huff and Strom Borman
+
