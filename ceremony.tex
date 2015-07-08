@@ -1,0 +1,134 @@
+
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[textwidth=12cm,centering]{geometry}
+\usepackage[x11names]{xcolor}
+\usepackage{background}
+
+\newcommand*\wb[3]{%
+  {\fontsize{#1}{#2}\usefont{U}{webo}{xl}{n}#3}}
+
+% The page frame
+\SetBgColor{Goldenrod3}
+\SetBgAngle{0}
+\SetBgScale{1}
+\SetBgOpacity{1}
+\SetBgContents{%
+\begin{tikzpicture}
+\node at (0.5\paperwidth,0) {\wb{80}{34}{E}\rule[60pt]{.2\textwidth}{0.4pt}%
+  \raisebox{55pt}{%
+  \makebox[.6\textwidth]{\ \fontsize{24}{29}\selectfont\scshape Strom \& Katy }}%
+  \rule[60pt]{.2\textwidth}{0.4pt}\wb{80}{34}{F}};
+\node at (2,-0.5\textheight) {\rule{0.4pt}{.8\textheight}};
+\node at (19.5,-0.5\textheight) {\rule{0.4pt}{.8\textheight}};
+\node at (0.5\paperwidth,-\textheight) {\wb{80}{34}{G}\rule[-10pt]{\textwidth}{0.4pt}\wb{80}{34}{H}} ;
+\end{tikzpicture}%
+}
+
+% colorize text
+\newcommand*\ColText[1]{\textcolor{Goldenrod3}{#1}}
+
+% a tabular* for each food group
+%\newenvironment{Group}[1]
+%  {\noindent\begin{tabular*}{\textwidth}{@{}p{.8\linewidth}@{\extracolsep{\fill}}r@{}}
+%    {\fontsize{24}{29}\selectfont\ColText{#1}}\\[0.8em]}
+%  {\end{tabular*}}
+
+% a tabular* for each heading
+\newcommand*\heading[2]{%
+    \vspace{2.0em}
+    {\fontsize{24}{29}\selectfont\ColText{#1}}\\
+    {\fontsize{14}{14}\selectfont\ColText{(#2)}}\\\vspace{2.0em}}
+
+
+\begin{document}
+\begin{center}
+\heading{Processional}{Wedding Party}
+Greta Qaiyum\\
+Allison Gouch\\
+Peter Borman\\
+Katy \& Strom
+
+\heading{Welcome}{Greta}
+Her own words.
+
+\pagebreak
+\heading{Kahlil Gibran - On Marriage}{Allison}
+You were born together, and together you shall be forevermore.\\
+You shall be together when the white wings of death scatter your days.\\
+But let there be spaces in your togetherness,\\
+And let the winds of the heavens dance between you.\\
+\vspace{2mm}
+Love one another, but make not a bond of love:\\
+Let it rather be a moving sea between the shores of your souls.\\
+Fill each other's cup but drink not from one cup.\\
+Give one another of your bread but eat not from the same loaf\\
+Sing and dance together and be joyous, but let each one of you be alone,\\
+Even as the strings of a lute are alone though they quiver with the same music.\\
+\vspace{2mm}
+Give your hearts, but not into each other's keeping.\\
+For only the hand of Life can contain your hearts.\\
+And stand together yet not too near together:\\
+For the pillars of the temple stand apart,\\
+And the oak tree and the cypress grow not in each other's shadow.\\
+
+\pagebreak
+\heading{(Jalal ad-Din) Rumi - A Blessing}{Peter}
+May these vows and this marriage be blessed.\\
+May it be sweet milk,\\
+this marriage, like wine and halvah.\\
+May this marriage offer fruit and shade, like the date palm.\\
+May this marriage be full of laughter,\\
+your every day a paradise.\\
+May this marriage be a sign of compassion,\\
+a seal of happiness here and hereafter.\\
+May this marriage have a fair face and a good name,\\
+an omen as welcome\\
+as the moon in a clear blue sky.\\
+
+\pagebreak
+\heading{Hopes}{Katy \& Strom}
+
+Katy says some nice things to Strom.\\
+Strom says some nice things to Katy.
+
+\heading{Personal Vows}{Greta}
+
+\begin{itemize}
+\item[\textbf{Do you}] vow to support and nurture each other’s goals and dreams as if they were your own? (we do)
+\item[\textbf{Do you}] vow to work to stay connected even when you change and grow individually? (we do)
+\item[\textbf{Do you}] vow to take each other seriously when needed and to laugh together the rest of the time? (we do)
+\item[\textbf{Do you}] vow to show every day that you adore and love each other? (we do)
+\end{itemize}
+
+\heading{Community Vow}{Greta}
+
+Do you, the community around Katy and Strom, promise to encourage and love 
+these two people, give them your guidance, and support them in the promises 
+that they have made? (We Do) 
+
+\pagebreak 
+\heading{Ring Exchange}{Greta}
+
+\textbf{Katy's ring} is no ordinary band. It was worn by Katy’s 
+great-grandmother and namesake, Kathryn L. Crowe, on the event of her first 
+wedding to Katy’s great-grandfather, Robert J. Donovan, 91 years ago. With this 
+piece of family history, Katy and Strom celebrate the joining of their 
+families.
+
+\vspace{5mm}
+
+\textbf{Strom's ring}, a golden band with a half twist in it, is also no ordinary ring. 
+This M{\"o}bius Strip is a three-dimensional geometrical object with only one 
+continuous surface and one continuous edge. With this symbol of oneness, Katy 
+and Strom celebrate 
+their union.
+
+\newpage
+
+Fin.
+\end{center}
+\end{document}
+
