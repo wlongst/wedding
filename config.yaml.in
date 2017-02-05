@@ -1,4 +1,5 @@
 username: YOURNAME@gmail.com
+apppass: GOOGLE_APP_PASSWORD
 smtpserver: smtp.gmail.com:587
 from: YOUR NAME and YOUR OTHER NAME <YOURNAME@gmail.com>
 cc: YOUR NAME <YOURNAME@gmail.com>,YOUR OTHER NAME <YOUROTHERNAME@gmail.com>
