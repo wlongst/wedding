@@ -1,0 +1,6 @@
+*.yaml
+test*.*
+resources/*.pdf
+*.aux
+*.log
+*.out
