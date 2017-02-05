@@ -5,13 +5,19 @@ wedding. It will take place at 5pm on June 24, 2017 at Fort William Henry,
 in Lake George, NY.  An official invitation is attached to this email as a pdf.
 More information and updates can be found at our website:
 
+{% if cool %}
+  http://lianeandbrianponfarr.com/
+{% endif %}
+{% if not cool %}
   http://lianeandbrian.com/
+{% endif %}
 
 {{ comments }}
+
 We hope you can confirm your attendance online by May 24, 2017.
 The RSVP form can be found on our website, or you can go directly to:
 
-  https://goo.gl/forms/Ec5MMInfBkZgb5IP2
+  http://bit.ly/2kCRVU9
 
 If you have any questions please send an email to lianeandbrian@lianeandbrian.com.
 
