@@ -382,7 +382,7 @@
 
 								var mapOptions = {
 									scrollwheel: false,
-									zoom: 12,
+									zoom: 8,
 									center: new google.maps.LatLng(43.420957, -73.712707),
 					mapTypeControlOptions: {
 					  mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
@@ -399,19 +399,29 @@
 
 				var places = [
 					['Location1', 43.420957, -73.712707, 1],
+					['Location2', 42.7487124 , -73.8054981, 1]
 				];
 
 				function setMarkers(map, locations) {
 					// Add markers to the map
-					var image = {
-						url: 'images/map-marker.png',
-						// This marker is 40 pixels wide by 42 pixels tall.
-						size: new google.maps.Size(62, 58),
-						// The origin for this image is 0,0.
-						origin: new google.maps.Point(0,0),
-						// The anchor for this image is the base of the pin at 20,42.
-						anchor: new google.maps.Point(20, 58)
-					};
+					var image = [{
+                            url: 'images/map-marker.png',
+                            // This marker is 40 pixels wide by 42 pixels tall.
+                            size: new google.maps.Size(62, 58),
+                            // The origin for this image is 0,0.
+                            origin: new google.maps.Point(0,0),
+                            // The anchor for this image is the base of the pin at 20,42.
+                            anchor: new google.maps.Point(20, 58)
+                        },
+                        {
+                            url: 'images/map-airplane.png',
+                            // This marker is 40 pixels wide by 42 pixels tall.
+                            size: new google.maps.Size(58, 58),
+                            // The origin for this image is 0,0.
+                            origin: new google.maps.Point(0,0),
+                            // The anchor for this image is the base of the pin at 20,42.
+                            anchor: new google.maps.Point(29, 58)
+                        }];
 
 					for (var i = 0; i < locations.length; i++) {
 						var place = locations[i];
@@ -419,7 +429,7 @@
 						var marker = new google.maps.Marker({
 							position: myLatLng,
 							map: map,
-							icon: image,
+							icon: image[i],
 							title: place[0],
 							zIndex: place[3],
 							animation: google.maps.Animation.DROP
