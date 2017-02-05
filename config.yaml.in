@@ -1,0 +1,6 @@
+username: YOURNAME@gmail.com
+smtpserver: smtp.gmail.com:587
+from: YOUR NAME and YOUR OTHER NAME <YOURNAME@gmail.com>
+cc: YOUR NAME <YOURNAME@gmail.com>,YOUR OTHER NAME <YOUROTHERNAME@gmail.com>
+from_address: YOUR NAME <YOURNAME@gmail.com>
+wedders: YOUR NAME and YOUR OTHER NAME
