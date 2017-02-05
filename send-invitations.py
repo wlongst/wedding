@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+from tqdm import tqdm
+import yaml
+
 import jinja2
 import mimetypes
 import numpy as np
@@ -43,30 +46,35 @@ invitees = np.loadtxt(sys.argv[1],
         dtype={'names': ('invitee','email1','email2','email3','comments'),
             'formats': ('S128', 'S128', 'S128', 'S128', 'S256')})
 
-username = 'katyhuff@gmail.com'
-password = getpass.getpass('password:')
-server = smtplib.SMTP('smtp.gmail.com:587')
-server.starttls()
-server.login(username, password)
-filename="/Users/khuff/repos/musings/wedding/wedding.pdf"
+# Load the configuration
 
-for family in invitees:
+with open('config.yaml', 'r') as fp:
+    config = yaml.load(fp)
+
+filename="resources/invitation.pdf"
+password = getpass.getpass('password:')
+server = smtplib.SMTP(config['smtpserver'])
+server.starttls()
+server.login(config['username'], password)
+
+
+for family in tqdm(invitees):
     email_body = template.render(guests=family['invitee'],
                                  comments = get_comments(family))
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = 'Invitation to the Wedding of Katy Huff and Strom Borman'
-    msg['From'] = 'Katy Huff and Strom Borman <stromandkaty@gmail.com>'
+    msg['Subject'] = 'Invitation to the Wedding of {}'.format(config['wedders'])
+    msg['From'] = config['from']
     msg['To'] = get_recipients(family)
-    msg['Cc'] = 'Matthew Strom Borman <stromborman@gmail.com>,Katy Huff <katyhuff@gmail.com>'
+    msg['Cc'] = config['cc']
     msg['Date'] = email.utils.formatdate()
     msg.attach(MIMEText(email_body, 'plain'))
     part=MIMEApplication(open(filename).read()) 
     part.add_header('Content-Disposition',
             'attachment; filename="%s"' % os.path.basename(filename))
     msg.attach(part)
-    from_address = 'Katy Huff <katyhuff@gmail.com>'
+    from_address = config['from']
     to_address = []
     to_address.extend([em.strip() for em in get_recipients(family).split(', ')])
 
     print(email_body)
-    server.sendmail(from_address, to_address, msg.as_string())
+    #server.sendmail(from_address, to_address, msg.as_string())
