@@ -1,11 +1,13 @@
 #!/usr/bin/env python
+'''Invitation email generator'''
 
+from argparse import ArgumentParser
 from tqdm import tqdm
 import yaml
 
 import jinja2
 import pandas as pd
-import os
+from os.path import basename
 import smtplib
 import sys
 import email
@@ -15,8 +17,32 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 
 
-if len(sys.argv) < 3:
-    print('Usage: ./send-invitations.py invitees.tsv invitation.txt.in')
+def process_arguments(args):
+
+    parser = ArgumentParser(description=__doc__)
+
+    parser.add_argument('-a', '--attachment', dest='attachment',
+                        type=str, default="resources/invitation.pdf",
+                        help='Path to attachment file')
+
+    parser.add_argument('-c', '--config', dest='config',
+                        type=str, default='config.yaml',
+                        help='Path to the configuration file')
+
+    parser.add_argument('-s', '--send',
+                        dest='debug',
+                        action='store_false',
+                        help='Send emails')
+
+    parser.add_argument('recipients',
+                        type=str,
+                        help='File containing the table of recipients')
+
+    parser.add_argument('template',
+                        type=str,
+                        help='File containing the email template')
+
+    return parser.parse_args(args)
 
 
 def get_comments(arr):
@@ -27,59 +53,68 @@ def get_comments(arr):
 
 
 def get_recipients(arr):
-    l=[arr['email1'], arr['email2'], arr['email3']]
-    r=[]
+    l = [arr['email1'], arr['email2'], arr['email3']]
+    r = []
     for item in l:
         if len(item) > 0:
             r.append(str(item))
-    comma=", "
-    return comma.join(r)
+    return ', '.join(r)
 
 
-with open(sys.argv[2], 'r') as fp:
-    email_template = fp.read()
+if __name__ == '__main__':
+    params = process_arguments(sys.argv[1:])
 
-template = jinja2.Template(email_template)
+    with open(params.template, 'r') as fp:
+        template = jinja2.Template(fp.read())
 
-invitees = pd.read_csv(sys.argv[1],
-                       delimiter='\t',
-                       header=None,
-                       names=['invitee', 'email1', 'email2', 'email3', 'comments'],
-                       dtype=str,
-                       na_filter=False)
+    # Load the configuration
+    with open(params.config, 'r') as fp:
+        config = yaml.load(fp)
 
-# Load the configuration
-with open('config.yaml', 'r') as fp:
-    config = yaml.load(fp)
+    # Load the pdf
+    with open(params.attachment, 'rb') as fp:
+        attachment = fp.read()
 
-# Load the pdf
-filename="resources/invitation.pdf"
-with open(filename, 'rb') as fp:
-    attachment = fp.read()
+    if not params.debug:
+        server = smtplib.SMTP(config['smtpserver'])
+        server.starttls()
+        server.login(config['username'], config['apppass'])
+    else:
+        server = False
 
-server = smtplib.SMTP(config['smtpserver'])
-server.starttls()
-server.login(config['username'], config['apppass'])
+    invitees = pd.read_table(params.recipients, dtype=str, na_filter=False)
 
+    subject = 'Invitation to the Wedding of {}'.format(config['wedders'])
+    content = 'attachment; filename="{}"'.format(basename(params.attachment))
+    for family in tqdm(invitees.iterrows()):
+        family = dict(family[1])
 
-for family in tqdm(invitees.iterrows()):
-    family = dict(family[1])
-    email_body = template.render(guests=family['invitee'],
-                                 comments=get_comments(family))
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = 'Invitation to the Wedding of {}'.format(config['wedders'])
-    msg['From'] = config['from']
-    msg['To'] = str(get_recipients(family))
-    msg['Cc'] = config['cc']
-    msg['Date'] = email.utils.formatdate()
-    msg.attach(MIMEText(email_body, 'plain'))
-    part=MIMEApplication(attachment)
-    part.add_header('Content-Disposition',
-                    'attachment; filename="%s"' % os.path.basename(filename))
-    msg.attach(part)
-    from_address = config['from']
-    to_address = []
-    to_address.extend([str(em.strip()) for em in get_recipients(family).split(', ')])
+        email_body = template.render(guests=family['invitee'],
+                                     comments=get_comments(family))
 
-    print(email_body)
-    #server.sendmail(from_address, to_address, msg.as_string())
+        msg = MIMEMultipart('alternative')
+
+        msg['Subject'] = subject
+        msg['From'] = config['from']
+        msg['To'] = str(get_recipients(family))
+        msg['Cc'] = config['cc']
+        msg['Date'] = email.utils.formatdate()
+
+        msg.attach(MIMEText(email_body, 'plain'))
+
+        part = MIMEApplication(attachment)
+        part.add_header('Content-Disposition', content)
+        msg.attach(part)
+
+        from_address = config['from']
+
+        to_address = [str(em.strip())
+                      for em in get_recipients(family).split(', ')]
+
+        if params.debug:
+            print('From: {}'.format(from_address))
+            print('To: {}'.format(to_address))
+            print(email_body)
+            print('---')
+        else:
+            server.sendmail(from_address, to_address, msg.as_string())
