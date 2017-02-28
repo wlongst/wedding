@@ -45,20 +45,12 @@ def process_arguments(args):
     return parser.parse_args(args)
 
 
-def get_comments(arr):
-    if len(arr['comments']) > 0:
-        return str(arr['comments'])
-    else:
-        return ''
+def get_cool(arr):
+    return bool(arr['cool'])
 
 
-def get_recipients(arr):
-    l = [arr['email1'], arr['email2'], arr['email3']]
-    r = []
-    for item in l:
-        if len(item) > 0:
-            r.append(str(item))
-    return ', '.join(r)
+def get_kids(arr):
+    return int(arr['kids']) > 0
 
 
 if __name__ == '__main__':
@@ -82,21 +74,22 @@ if __name__ == '__main__':
     else:
         server = False
 
-    invitees = pd.read_table(params.recipients, dtype=str, na_filter=False)
+    invitees = pd.read_table(params.recipients, dtype=str, sep=',', na_filter=False)
 
     subject = 'Invitation to the Wedding of {}'.format(config['wedders'])
     content = 'attachment; filename="{}"'.format(basename(params.attachment))
-    for family in tqdm(invitees.iterrows()):
-        family = dict(family[1])
+    for record in tqdm(invitees.iterrows()):
+        record = dict(record[1])
 
-        email_body = template.render(guests=family['invitee'],
-                                     comments=get_comments(family))
+        email_body = template.render(guests=record['name'],
+                                     cool=get_cool(record),
+                                     kids=get_kids(record))
 
         msg = MIMEMultipart('alternative')
 
         msg['Subject'] = subject
         msg['From'] = config['from']
-        msg['To'] = str(get_recipients(family))
+        msg['To'] = str(record['email'])
         msg['Cc'] = config['cc']
         msg['Date'] = email.utils.formatdate()
 
@@ -108,12 +101,12 @@ if __name__ == '__main__':
 
         from_address = config['from']
 
-        to_address = [str(em.strip())
-                      for em in get_recipients(family).split(', ')]
+        to_address = record['email'].strip()
 
         if params.debug:
-            print('From: {}'.format(from_address))
+            print('---')
             print('To: {}'.format(to_address))
+            print('From: {}'.format(from_address))
             print(email_body)
             print('---')
         else:

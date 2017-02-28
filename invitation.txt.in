@@ -2,7 +2,7 @@ Dearest {{ guests }},
 
 With great joy, we are emailing to request the pleasure of your company at our 
 wedding. It will take place at 5pm on June 24, 2017 at Fort William Henry, 
-in Lake George, NY.  An official invitation is attached to this email as a pdf.
+in Lake George, NY. An official invitation is attached to this email as a pdf.
 More information and updates can be found at our website:
 
 {% if cool %}
@@ -12,7 +12,9 @@ More information and updates can be found at our website:
   http://lianeandbrian.com/
 {% endif %}
 
-{{ comments }}
+{% if kids %}
+We expect that several attendees will bring small children.
+{% endif %}
 
 We hope you can confirm your attendance online by May 24, 2017.
 The RSVP form can be found on our website, or you can go directly to:
