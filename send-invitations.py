@@ -74,7 +74,10 @@ if __name__ == '__main__':
     else:
         server = False
 
-    invitees = pd.read_table(params.recipients, dtype=str, sep=',', na_filter=False)
+    invitees = pd.read_table(params.recipients,
+                             dtype=str,
+                             sep=',',
+                             na_filter=False)
 
     subject = 'Invitation to the Wedding of {}'.format(config['wedders'])
     content = 'attachment; filename="{}"'.format(basename(params.attachment))
