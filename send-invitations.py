@@ -46,7 +46,13 @@ def process_arguments(args):
 
 
 def get_cool(arr):
-    return bool(arr['cool'])
+    return bool(int(arr['cool']) > 0)
+
+
+def get_guests(arr):
+    if len(arr['guest']) > 0:
+        return '{} and {}'.format(arr['name'], arr['guest'])
+    return arr['name']
 
 
 def get_kids(arr):
@@ -81,10 +87,11 @@ if __name__ == '__main__':
 
     subject = 'Invitation to the Wedding of {}'.format(config['wedders'])
     content = 'attachment; filename="{}"'.format(basename(params.attachment))
+
     for record in tqdm(invitees.iterrows()):
         record = dict(record[1])
 
-        email_body = template.render(guests=record['name'],
+        email_body = template.render(guests=get_guests(record),
                                      cool=get_cool(record),
                                      kids=get_kids(record))
 
