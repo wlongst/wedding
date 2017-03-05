@@ -5,17 +5,32 @@ wedding. It will take place at 5pm on June 24, 2017 at Fort William Henry,
 in Lake George, NY. An official invitation is attached to this email as a pdf.
 More information and updates can be found at our website:
 
-{% if cool %}  http://lianeandbrianponfarr.com/ {% else %}  http://lianeandbrian.com/ {% endif %}
+{% if cool -%}
+    http://lianeandbrianponfarr.com/
+{% else -%}
+    http://lianeandbrian.com/
+{% endif %}
 
 We hope you can confirm your attendance online by May 24, 2017.
 The RSVP form can be found on our website, or you can go directly to:
 
   http://bit.ly/2kCRVU9
 
-{% if kids %}We expect that several guests will bring small children. If you are planning
+{% if known_guest -%}
+Please fill out one RSVP for both of you.
+{% else -%}
+If you are planning to bring a guest, please include them as part
+of your RSVP.
+{% endif %}
+
+{% if kids -%}
+We expect that several guests will bring small children. If you are planning
 to do so, please let us know their ages so that we can plan accordingly.
 {% endif %}
-If you have any questions, please email us at lianeandbrian@lianeandbrian.com.
+
+If you have any questions, please email us at 
+
+    lianeandbrian@lianeandbrian.com.
 
 Thank You,
 Liane Carlson and Brian McFee
