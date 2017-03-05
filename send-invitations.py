@@ -51,8 +51,11 @@ def get_cool(arr):
 
 def get_guests(arr):
     if len(arr['guest']) > 0:
-        return '{} and {}'.format(arr['name'], arr['guest'])
-    return arr['name']
+        if arr['guest'] != 'Guest':
+            return '{} and {}'.format(arr['name'], arr['guest']), False
+        else:
+            return arr['name'], True
+    return arr['name'], False
 
 
 def get_kids(arr):
@@ -91,9 +94,11 @@ if __name__ == '__main__':
     for record in tqdm(invitees.iterrows()):
         record = dict(record[1])
 
-        email_body = template.render(guests=get_guests(record),
+        guests, bring_guest = get_guests(record)
+        email_body = template.render(guests=guests,
                                      cool=get_cool(record),
-                                     kids=get_kids(record))
+                                     kids=get_kids(record),
+                                     bring_guest=bring_guest)
 
         msg = MIMEMultipart('alternative')
 
