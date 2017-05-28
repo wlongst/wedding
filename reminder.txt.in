@@ -1,0 +1,30 @@
+Dear {{ guests }},
+
+This is a friendly reminder email about our impending wedding, which will take place 
+on June 24, 2017 at Fort William Henry, in Lake George, NY. 
+More information and updates can be found at our website:
+
+{% if cool -%}
+    http://lianeandbrianponfarr.com/
+{% else -%}
+    http://lianeandbrian.com/
+{% endif %}
+
+Please RSVP as soon as possible so that we can finalize the plans for the event.
+The RSVP form can be found on our website, or you can go directly to:
+
+  http://bit.ly/2kCRVU9
+
+{% if known_guest -%}
+Please fill out one RSVP for both of you.
+{% else -%}
+If you are planning to bring a guest, please include them as part
+of your RSVP.
+{% endif %}
+
+If you have any questions, please email us at 
+
+    lianeandbrian@lianeandbrian.com.
+
+Thank You,
+Liane Carlson and Brian McFee
